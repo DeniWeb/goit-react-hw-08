@@ -1,0 +1,32 @@
+.contact_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.contact_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 375px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .contact_item {
+    width: calc((100% - 15px) / 2);
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .contact_item {
+    width: calc((100% - 15px * 3) / 4);
+  }
+}

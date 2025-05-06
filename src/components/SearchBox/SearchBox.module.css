@@ -1,0 +1,22 @@
+.search_wrapper {
+  max-width: 375px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.search_input {
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .search_wrapper {
+    width: 345px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .search_wrapper {
+    width: 335px;
+  }
+}
