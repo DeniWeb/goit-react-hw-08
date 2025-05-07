@@ -2,14 +2,14 @@ import ContactForm from './ContactForm/ContactForm';
 import SearchBox from './SearchBox/SearchBox';
 import ContactList from './ContactList/ContactList';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts } from '../redux/contactsOps';
+import { useEffect } from 'react';
+import Loader from './Loader/Loader';
 import {
   selectContacts,
   selectError,
   selectLoading,
-} from '../redux/contactsSlice';
-import { fetchContacts } from '../redux/contactsOps';
-import { useEffect } from 'react';
-import Loader from './Loader/Loader';
+} from '../redux/contacts/slice';
 
 function App() {
   const contacts = useSelector(selectContacts);
