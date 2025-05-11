@@ -2,23 +2,23 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import s from './ContactForm.module.css';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactsOps';
 import { useId } from 'react';
+import { addContact } from '../../redux/contacts/operations';
 
 const initialValues = {
   name: '',
   number: '',
 };
 
-const FeedbackSchema = Yup.object().shape({
+const ContactsSchema = Yup.object().shape({
   name: Yup.string()
-    .min(3, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
+    .trim()
+    .min(3, 'Name is too short (min 3 characters)')
+    .max(50, 'Name is too long (max 50 characters)')
+    .required('Name must be required!'),
   number: Yup.string()
-    .min(7, 'Too Short!')
-    .max(15, 'Too Long!')
-    .required('Required'),
+    .matches(/^(?!\+)[\d-]{7,15}$/, 'Number must be between 7 and 15 digits!')
+    .required('Phone must be required!'),
 });
 
 const ContactForm = () => {
@@ -42,42 +42,40 @@ const ContactForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={FeedbackSchema}
+      validationSchema={ContactsSchema}
     >
-      {({ isValid, dirty }) => (
+      {({ errors, touched, isValid, dirty }) => (
         <Form className={s.form}>
           <div className={s.form_item}>
-            <label htmlFor={nameFieldId}>Name</label>
+            <label htmlFor={nameFieldId}>Name:</label>
             <Field
               className={s.field}
               type="text"
               name="name"
               id={nameFieldId}
+              placeholder="Name"
             />
-            <ErrorMessage
-              name="name"
-              component="span"
-              className={s.form_item_error}
-            />
+            {touched.name && errors.name && (
+              <span className={s.error}>{errors.name}</span>
+            )}
           </div>
 
           <div className={s.form_item}>
-            <label htmlFor={numberFieldId}>Number</label>
+            <label htmlFor={numberFieldId}>Number:</label>
             <Field
               className={s.field}
               type="text"
               name="number"
               id={numberFieldId}
+              placeholder="Number"
             />
-            <ErrorMessage
-              name="number"
-              component="span"
-              className={s.form_item_error}
-            />
+            {touched.number && errors.number && (
+              <span className={s.error}>{errors.number}</span>
+            )}
           </div>
 
           <button
-            className={s.form_btn_submit}
+            className={`${s.btn} ${!(isValid && dirty) ? s.disabled : ''}`}
             type="submit"
             disabled={!(isValid && dirty)}
           >
