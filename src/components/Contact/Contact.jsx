@@ -1,27 +1,31 @@
 import s from './Contact.module.css';
-import { FaPhoneAlt, FaRegTrashAlt } from 'react-icons/fa';
+import { FaPhoneAlt, FaRegEdit, FaRegTrashAlt } from 'react-icons/fa';
 import { IoPersonSharp } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contacts/operations';
+import { deleteContact, updateContact } from '../../redux/contacts/operations';
 import { useState } from 'react';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import EditContactModal from '../EditContactModal/EditContactModal';
 
 const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleDelete = () => {
-    setIsModalOpen(true);
-  };
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
 
-  const handleConfirm = () => {
+  const handleDelete = () => setDeleteModalOpen(true);
+  const confirmDelete = () => {
     dispatch(deleteContact(id));
-    setIsModalOpen(false);
+    setDeleteModalOpen(false);
   };
+  const cancelDelete = () => setDeleteModalOpen(false);
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const handleEdit = () => setEditModalOpen(true);
+  const confirmEdit = updatedContact => {
+    dispatch(updateContact(updatedContact));
+    setEditModalOpen(false);
   };
+  const cancelEdit = () => setEditModalOpen(false);
 
   return (
     <>
@@ -33,15 +37,29 @@ const Contact = ({ id, name, number }) => {
           <FaPhoneAlt /> {number}
         </span>
       </div>
-      <button onClick={handleDelete} className={s.contact_btn_delete}>
-        <FaRegTrashAlt />
-      </button>
 
-      {isModalOpen && (
+      <div className={s.contact_btns}>
+        <button onClick={handleEdit} className={s.contact_btn_edit}>
+          <FaRegEdit />
+        </button>
+        <button onClick={handleDelete} className={s.contact_btn_delete}>
+          <FaRegTrashAlt />
+        </button>
+      </div>
+
+      {isDeleteModalOpen && (
         <ConfirmModal
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
           name={name}
+          onConfirm={confirmDelete}
+          onCancel={cancelDelete}
+        />
+      )}
+
+      {isEditModalOpen && (
+        <EditContactModal
+          contact={{ id, name, number }}
+          onSave={confirmEdit}
+          onCancel={cancelEdit}
         />
       )}
     </>

@@ -1,5 +1,10 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { addContact, deleteContact, fetchContacts } from './operations';
+import {
+  addContact,
+  deleteContact,
+  fetchContacts,
+  updateContact,
+} from './operations';
 import { logout } from '../auth/operations';
 
 const initialState = {
@@ -27,11 +32,19 @@ const slice = createSlice({
         state.contacts.push(action.payload);
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isLoading = false;
 
         state.contacts = state.contacts.filter(
           contact => contact.id !== action.payload,
         );
+      })
+      .addCase(updateContact.fulfilled, (state, action) => {
+        const index = state.contacts.findIndex(
+          contact => contact.id === action.payload.id,
+        );
+        if (index !== -1) {
+          state.contacts[index] = action.payload;
+        }
       })
       .addMatcher(
         isAnyOf(
