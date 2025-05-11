@@ -17,7 +17,10 @@ const ContactsSchema = Yup.object().shape({
     .max(50, 'Name is too long (max 50 characters)')
     .required('Name must be required!'),
   number: Yup.string()
-    .matches(/^(?!\+)[\d-]{7,15}$/, 'Number must be between 7 and 15 digits!')
+    .matches(
+      /^\+?[0-9\s\-().]{7,20}$/,
+      'Number must be between 7 and 15 digits!',
+    )
     .required('Phone must be required!'),
 });
 

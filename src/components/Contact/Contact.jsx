@@ -8,7 +8,12 @@ const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
 
   const onDelete = () => {
-    dispatch(deleteContact(id));
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete "${name}"?`,
+    );
+    if (isConfirmed) {
+      dispatch(deleteContact(id));
+    }
   };
 
   return (
