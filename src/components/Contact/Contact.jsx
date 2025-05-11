@@ -3,17 +3,24 @@ import { FaPhoneAlt } from 'react-icons/fa';
 import { IoPersonSharp } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
+import { useState } from 'react';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
 const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const onDelete = () => {
-    const isConfirmed = window.confirm(
-      `Are you sure you want to delete "${name}"?`,
-    );
-    if (isConfirmed) {
-      dispatch(deleteContact(id));
-    }
+  const handleDelete = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleConfirm = () => {
+    dispatch(deleteContact(id));
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -26,9 +33,17 @@ const Contact = ({ id, name, number }) => {
           <FaPhoneAlt /> {number}
         </span>
       </div>
-      <button onClick={onDelete} className={s.contact_btn_delete}>
+      <button onClick={handleDelete} className={s.contact_btn_delete}>
         Delete
       </button>
+
+      {isModalOpen && (
+        <ConfirmModal
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+          name={name}
+        />
+      )}
     </>
   );
 };
