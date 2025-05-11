@@ -1,5 +1,5 @@
 import s from './Contact.module.css';
-import { FaPhoneAlt } from 'react-icons/fa';
+import { FaPhoneAlt, FaRegTrashAlt } from 'react-icons/fa';
 import { IoPersonSharp } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
@@ -34,7 +34,7 @@ const Contact = ({ id, name, number }) => {
         </span>
       </div>
       <button onClick={handleDelete} className={s.contact_btn_delete}>
-        Delete
+        <FaRegTrashAlt />
       </button>
 
       {isModalOpen && (
