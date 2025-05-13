@@ -1,3 +1,7 @@
+h2 {
+  text-align: center;
+}
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -13,7 +17,7 @@
 
 .modal_edit {
   background: #fff;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 12px;
   width: 400px;
   display: flex;
@@ -23,7 +27,9 @@
 
 input {
   width: 100%;
+  margin-top: 0.25rem;
   padding: 0.5rem;
+  border-radius: var(--radius);
 }
 
 .buttons {
@@ -31,17 +37,23 @@ input {
   justify-content: space-between;
 }
 
-.modal_btn_edit {
+.modal_edit_btn {
   width: 5rem;
-  padding: 6px 0;
-  background-color: beige;
-  border-radius: 6px;
+  padding: 0.3rem 0;
+  border-radius: var(--radius);
+  color: var(--color-text-inverse);
   border: 1px solid black;
-  transition: all 0.25s ease-in-out;
+  transition: color --transition-fast;
 
   &:hover {
-    color: beige;
-    border-color: beige;
-    background-color: rgb(92, 90, 90);
+    color: var(--color-text);
   }
+}
+
+.modal_edit_btn_save {
+  background-color: var(--color-btn-edit);
+}
+
+.modal_edit_btn_cancel {
+  background-color: var(--color-btn-delete);
 }

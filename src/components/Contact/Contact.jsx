@@ -39,10 +39,13 @@ const Contact = ({ id, name, number }) => {
       </div>
 
       <div className={s.contact_btns}>
-        <button onClick={handleEdit} className={s.contact_btn_edit}>
+        <button onClick={handleEdit} className={`${s.contact_btn} ${s.edit}`}>
           <FaRegEdit />
         </button>
-        <button onClick={handleDelete} className={s.contact_btn_delete}>
+        <button
+          onClick={handleDelete}
+          className={`${s.contact_btn} ${s.delete}`}
+        >
           <FaRegTrashAlt />
         </button>
       </div>

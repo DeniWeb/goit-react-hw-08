@@ -33,10 +33,17 @@ const EditContactModal = ({ contact, onSave, onCancel }) => {
           />
         </label>
         <div className={s.buttons}>
-          <button type="submit" className={s.modal_btn_edit}>
+          <button
+            type="submit"
+            className={`${s.modal_edit_btn} ${s.modal_edit_btn_save}`}
+          >
             Save
           </button>
-          <button type="button" onClick={onCancel} className={s.modal_btn_edit}>
+          <button
+            type="button"
+            onClick={onCancel}
+            className={`${s.modal_edit_btn} ${s.modal_edit_btn_cancel}`}
+          >
             Cancel
           </button>
         </div>

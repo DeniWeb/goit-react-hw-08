@@ -1,31 +1,24 @@
 .contact_item_wrap {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
-.contact_btn_delete {
-  padding: 6px 12px;
-  background-color: var(--color-primary);
-  color: var(--color-bg);
-  border-radius: 6px;
+.contact_btn {
+  padding: 0.35rem 0.5rem;
+  color: var(--color-text-inverse);
+  border-radius: var(--radius);
   border: 1px solid var(--color-bg);
-  transition: all 0.25s ease-in-out;
+  transition: color var(--transition-fast);
 
   &:hover {
     color: var(--color-text);
   }
 }
+.edit {
+  background-color: var(--color-btn-edit);
+}
 
-.contact_btn_edit {
-  padding: 6px 12px;
-  background-color: #057c1b;
-  color: var(--color-bg);
-  border-radius: 6px;
-  border: 1px solid var(--color-bg);
-  transition: all 0.25s ease-in-out;
-
-  &:hover {
-    color: var(--color-text);
-  }
+.delete {
+  background-color: var(--color-btn-delete);
 }

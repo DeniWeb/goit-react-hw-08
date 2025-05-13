@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <>
       <div className={s.container}>
-        <h1 className={s.title}>Contacts manager welcome page </h1>
+        <h1 className={s.title}>This is contacts manager</h1>
         <RiContactsBook2Fill size={69} />
       </div>
     </>

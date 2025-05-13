@@ -15,7 +15,7 @@
   background: white;
   padding: 2rem;
   border-radius: 10px;
-  width: 400px;
+  width: 20rem;
   text-align: center;
 }
 
@@ -25,17 +25,22 @@
   justify-content: space-around;
 }
 
-.modal_btn_conf {
+.modal_btn {
   width: 5rem;
   padding: 6px 0;
-  background-color: beige;
+  color: var(--color-text-inverse);
   border-radius: 6px;
   border: 1px solid black;
-  transition: all 0.25s ease-in-out;
+  transition: color var(--transition-fast);
 
   &:hover {
-    color: beige;
-    border-color: beige;
-    background-color: rgb(92, 90, 90);
+    color: var(--color-text);
   }
+}
+
+.modal_btn_conf {
+  background-color: var(--color-btn-edit);
+}
+.modal_btn_cancel {
+  background-color: var(--color-btn-delete);
 }
